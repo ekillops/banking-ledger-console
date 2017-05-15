@@ -26,13 +26,12 @@ Note:
 
 ## Setup/Installation Requirements
 
-_Requires .Net and Microsoft Sql Server_
+_Requires .Net Framework and Visual Studio_
 
 1. Clone repository.
-2. Navigate to project directory.
-3. Open project in Visual Studio
-4. Restore dependencies.
-5. In Visual Studio run program by hitting 'Play' or 'F5'
+2. Open project in Visual Studio
+3. Restore dependencies.
+4. In Visual Studio run program by hitting 'Play' or 'F5'
 
 ## Technologies Used
 
