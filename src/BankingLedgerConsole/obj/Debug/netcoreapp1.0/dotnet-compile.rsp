@@ -1,5 +1,5 @@
---temp-output:c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\obj\Debug\netcoreapp1.0\
---out:c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\bin\Debug\netcoreapp1.0\BankingLedgerConsole.dll
+--temp-output:C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\obj\Debug\netcoreapp1.0\
+--out:C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\bin\Debug\netcoreapp1.0\BankingLedgerConsole.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -86,5 +86,5 @@
 --reference:C:\Users\M1530\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\M1530\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\M1530\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
-c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Program.cs
-c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Properties\AssemblyInfo.cs
+C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Program.cs
+C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Properties\AssemblyInfo.cs

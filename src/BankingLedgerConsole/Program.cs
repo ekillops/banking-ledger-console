@@ -8,28 +8,28 @@ namespace BankingLedgerConsole
 
     public static class UserHelper // UserHelper acts as temporary storage for user account data. Storage only last duration of session.
     {
-        public static List<User> allUsers = new List<User>();
+        public static List<User> AllUsers = new List<User>();
 
         public static List<User> GetAll()
         {
-            return allUsers;
+            return AllUsers;
         }
         public static void AddNew(User newUser)
         {
-            allUsers.Add(newUser);
+            AllUsers.Add(newUser);
         }
         public static User FindByName(string inputName)
         {
-            return allUsers.FirstOrDefault(u => u.name == inputName);
+            return AllUsers.FirstOrDefault(u => u.Name == inputName);
         }
 
         public static bool UserNameAvailable(string inputUserName)
         {
             bool nameAvailable = true;
 
-            foreach (User user in allUsers)
+            foreach (User user in AllUsers)
             {
-                if (user.name == inputUserName)
+                if (user.Name == inputUserName)
                 {
                     nameAvailable = false;
                 }
@@ -43,69 +43,69 @@ namespace BankingLedgerConsole
     public class User
     {
 
-        public string name { get; set; } // username rather than first or last
-        public string password { get; set; }
-        public Account account { get; set; }
+        public string Name { get; set; } // username rather than first or last
+        public string Password { get; set; }
+        public Account Account { get; set; }
 
         public User(string newName, string newPassword)
         {
-            name = newName;
-            password = newPassword;
-            account = new Account();
+            Name = newName;
+            Password = newPassword;
+            Account = new Account();
         }
     }
 
     public class Account
     {
-        decimal balance;
-        List<Transaction> transactions { get; set; }
+        decimal Balance;
+        List<Transaction> Transactions { get; set; }
         
         public Account()
         {
-            balance = 0;
-            transactions = new List<Transaction>();
+            Balance = 0;
+            Transactions = new List<Transaction>();
         }
 
         public void Deposit(decimal amount)
         {
             if (amount > 0)
             {
-                balance += amount;
-                transactions.Add(new Transaction(amount, "deposit"));
+                Balance += amount;
+                Transactions.Add(new Transaction(amount, "deposit"));
             }
         }
 
         public void Withdraw(decimal amount)
         {
-            if (amount > 0 && amount <= balance)
+            if (amount > 0 && amount <= Balance)
             {
-                balance -= amount;
-                transactions.Add(new Transaction(amount, "withdrawal"));
+                Balance -= amount;
+                Transactions.Add(new Transaction(amount, "withdrawal"));
             }
         }
         public decimal GetBalance()
         {
-            return balance;
+            return Balance;
         }
 
         public List<Transaction> GetTransactionHistory()
         {
-            return transactions.OrderByDescending(t => t.date).ToList();
+            return Transactions.OrderByDescending(t => t.Date).ToList();
         }
 
     }
 
     public class Transaction
     {
-        public DateTime date { get; set; }
-        public decimal amount { get; set; }
-        public string type { get; set; } // "deposit"/"withdrawal"
+        public DateTime Date { get; set; }
+        public decimal Amount { get; set; }
+        public string Type { get; set; } // "deposit"/"withdrawal"
 
         public Transaction(decimal newAmount, string newDepositType)
         {
-            date = DateTime.Now;
-            amount = newAmount;
-            type = newDepositType;
+            Date = DateTime.Now;
+            Amount = newAmount;
+            Type = newDepositType;
         }
     } 
 
@@ -125,7 +125,7 @@ namespace BankingLedgerConsole
             string inputPassword = null;
             User currentUser = null; // Holds user object when logged in
 
-            Console.WriteLine("Welcome to the CashSource online banking terminal. Please [L]ogin or [R]egister...");
+            Console.WriteLine("Welcome to CashSource, the alternate source for online banking! Please [L]ogin or [R]egister...");
 
             while (!done)
             {
@@ -150,7 +150,7 @@ namespace BankingLedgerConsole
                             Console.WriteLine("| Account Balance |");
                             Console.WriteLine("-------------------");
                             Console.WriteLine("");
-                            Console.WriteLine($"Your balance is ${currentUser.account.GetBalance()}");
+                            Console.WriteLine($"Your balance is ${currentUser.Account.GetBalance()}");
                             break;
                         case 'D':
                             Console.Clear();
@@ -166,9 +166,9 @@ namespace BankingLedgerConsole
 
                             if (validInput && depositAmountInt > 0)
                             {
-                                currentUser.account.Deposit(depositAmountInt);
+                                currentUser.Account.Deposit(depositAmountInt);
                                 Console.WriteLine("");
-                                Console.WriteLine($"Deposit successful. Your new balance is {currentUser.account.GetBalance()}");
+                                Console.WriteLine($"Deposit successful. Your new balance is {currentUser.Account.GetBalance()}");
                             }
                             else
                             {
@@ -187,16 +187,16 @@ namespace BankingLedgerConsole
                             decimal withdrawalAmountInt; // Holds converted input if parse is successful
                             validInput = Decimal.TryParse(withdrawalAmountString, out withdrawalAmountInt);
 
-                            if (validInput && withdrawalAmountInt > currentUser.account.GetBalance())
+                            if (validInput && withdrawalAmountInt > currentUser.Account.GetBalance())
                             {
                                 Console.WriteLine("");
                                 Console.WriteLine("Withdraw amount is greater than current balance.");
                             }
                             else if (validInput && withdrawalAmountInt > 0)
                             {
-                                currentUser.account.Withdraw(withdrawalAmountInt);
+                                currentUser.Account.Withdraw(withdrawalAmountInt);
                                 Console.WriteLine("");
-                                Console.WriteLine($"Withdraw successful. Your new balance is {currentUser.account.GetBalance()}");
+                                Console.WriteLine($"Withdraw successful. Your new balance is {currentUser.Account.GetBalance()}");
                             }
                             else
                             {
@@ -208,18 +208,18 @@ namespace BankingLedgerConsole
                             Console.Clear();
                             Console.WriteLine("|       Transaction History       |");
                             Console.WriteLine("-----------------------------------");
-                            foreach (Transaction transaction in currentUser.account.GetTransactionHistory())
+                            foreach (Transaction transaction in currentUser.Account.GetTransactionHistory())
                             {
                                 oldFontColor = Console.ForegroundColor;
-                                switch (transaction.type)
+                                switch (transaction.Type)
                                 {
                                     case "deposit":
                                         Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine($" {transaction.date.ToString("d")} {transaction.date.ToString("t")} | +{transaction.amount}");
+                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | +{transaction.Amount}");
                                         break;
                                     case "withdrawal":
                                         Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine($" {transaction.date.ToString("d")} {transaction.date.ToString("t")} | -{transaction.amount}");
+                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | -{transaction.Amount}");
                                         break;
                                     default:
                                         break;
@@ -232,7 +232,7 @@ namespace BankingLedgerConsole
                             currentUser = null;
                             isLoggedIn = false;
                             Console.Clear();
-                            Console.WriteLine("Welcome to the CashSource online banking terminal. Please [L]ogin or [R]egister....");
+                            Console.WriteLine("Welcome to CashSource, the alternate source for online banking! Please [L]ogin or [R]egister...");
                             break;
                         case 'H':
                             Console.Clear();
@@ -277,12 +277,12 @@ namespace BankingLedgerConsole
                                 Console.ForegroundColor = Console.BackgroundColor; // Change font color to hide user password, not secure if user manually changes font color or background while typing
                                 inputPassword = Console.ReadLine();
                                 Console.ForegroundColor = oldFontColor;
-                                if (foundUser.password == inputPassword)
+                                if (foundUser.Password == inputPassword)
                                 {
                                     currentUser = foundUser;
                                     isLoggedIn = true;
                                     Console.Clear();
-                                    Console.WriteLine($"Welcome {currentUser.name}");
+                                    Console.WriteLine($"Welcome {currentUser.Name}");
                                 }
                                 else
                                 {

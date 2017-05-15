@@ -7,8 +7,8 @@
 -debug:full
 -nostdlib
 -nologo
-"c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
--out:"c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\bin\Debug\netcoreapp1.0\BankingLedgerConsole.dll"
+"C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
+-out:"C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\bin\Debug\netcoreapp1.0\BankingLedgerConsole.dll"
 -r:"C:\Users\M1530\.nuget\packages\Microsoft.CSharp\4.0.1\ref\netstandard1.0\Microsoft.CSharp.dll"
 -r:"C:\Users\M1530\.nuget\packages\Microsoft.VisualBasic\10.0.1\ref\netstandard1.1\Microsoft.VisualBasic.dll"
 -r:"C:\Users\M1530\.nuget\packages\Microsoft.Win32.Primitives\4.0.1\ref\netstandard1.3\Microsoft.Win32.Primitives.dll"
@@ -82,5 +82,5 @@
 -r:"C:\Users\M1530\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\M1530\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\M1530\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
-"c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Program.cs"
-"c:\users\m1530\documents\visual studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Properties\AssemblyInfo.cs"
+"C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Program.cs"
+"C:\Users\M1530\Documents\Visual Studio 2015\Projects\BankingLedgerConsole\src\BankingLedgerConsole\Properties\AssemblyInfo.cs"
