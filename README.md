@@ -22,7 +22,7 @@ Users must be able to:
 
 Note:
 
-* Application uses temporary memory storage. User information will not be stored past then end of the session.
+* Application uses temporary memory storage. User information will not be stored past the end of the session.
 
 ## Setup/Installation Requirements
 
