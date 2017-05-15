@@ -64,21 +64,21 @@ namespace BankingLedgerConsole
             Transactions = new List<Transaction>();
         }
 
-        public void Deposit(decimal amount)
+        public void Deposit(decimal amount, string description = "")
         {
             if (amount > 0)
             {
                 Balance += amount;
-                Transactions.Add(new Transaction(amount, "deposit"));
+                Transactions.Add(new Transaction(amount, "deposit", description));
             }
         }
 
-        public void Withdraw(decimal amount)
+        public void Withdraw(decimal amount, string description = "")
         {
             if (amount > 0 && amount <= Balance)
             {
                 Balance -= amount;
-                Transactions.Add(new Transaction(amount, "withdrawal"));
+                Transactions.Add(new Transaction(amount, "withdrawal", description));
             }
         }
 
@@ -97,12 +97,14 @@ namespace BankingLedgerConsole
     {
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
+        public string Description { get; set; }
         public string Type { get; set; } // "deposit"/"withdrawal"
 
-        public Transaction(decimal newAmount, string newDepositType)
+        public Transaction(decimal newAmount, string newDepositType, string newDescription = "")
         {
             Date = DateTime.Now;
             Amount = newAmount;
+            Description = newDescription;
             Type = newDepositType;
         }
     }
@@ -156,16 +158,21 @@ namespace BankingLedgerConsole
                             Console.WriteLine("| Deposit |");
                             Console.WriteLine("------------");
                             Console.WriteLine("");
-                            Console.Write("Please enter deposit amount: ");
+                            Console.Write("Deposit amount: ");
 
                             string depositAmountString = Console.ReadLine();
+
+                            Console.WriteLine("");
+                            Console.Write("Description: ");
+
+                            string depositDescription = Console.ReadLine();
 
                             decimal depositAmountInt; // Holds converted input if parse is successful
                             validInput = Decimal.TryParse(depositAmountString, out depositAmountInt);
 
                             if (validInput && depositAmountInt > 0)
                             {
-                                currentUser.Account.Deposit(depositAmountInt);
+                                currentUser.Account.Deposit(depositAmountInt, depositDescription);
                                 Console.WriteLine("");
                                 Console.WriteLine($"Deposit successful. Your new balance is {currentUser.Account.GetBalance()}");
                             }
@@ -179,9 +186,14 @@ namespace BankingLedgerConsole
                             Console.WriteLine("| Withdraw |");
                             Console.WriteLine("------------");
                             Console.WriteLine("");
-                            Console.Write("Please enter withdrawal amount: ");
+                            Console.Write("Withdrawal amount: ");
 
                             string withdrawalAmountString = Console.ReadLine();
+
+                            Console.WriteLine("");
+                            Console.Write("Description: ");
+
+                            string withdrawalDescription = Console.ReadLine();
 
                             decimal withdrawalAmountInt; // Holds converted input if parse is successful
                             validInput = Decimal.TryParse(withdrawalAmountString, out withdrawalAmountInt);
@@ -193,7 +205,7 @@ namespace BankingLedgerConsole
                             }
                             else if (validInput && withdrawalAmountInt > 0)
                             {
-                                currentUser.Account.Withdraw(withdrawalAmountInt);
+                                currentUser.Account.Withdraw(withdrawalAmountInt, withdrawalDescription);
                                 Console.WriteLine("");
                                 Console.WriteLine($"Withdraw successful. Your new balance is {currentUser.Account.GetBalance()}");
                             }
@@ -205,8 +217,8 @@ namespace BankingLedgerConsole
                             break;
                         case 'T':
                             Console.Clear();
-                            Console.WriteLine("|       Transaction History       |");
-                            Console.WriteLine("-----------------------------------");
+                            Console.WriteLine("|              Transaction History              |");
+                            Console.WriteLine("-------------------------------------------------");
                             foreach (Transaction transaction in currentUser.Account.GetTransactionHistory())
                             {
                                 oldFontColor = Console.ForegroundColor;
@@ -214,17 +226,17 @@ namespace BankingLedgerConsole
                                 {
                                     case "deposit":
                                         Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | +{transaction.Amount}");
+                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | +{transaction.Amount} | {transaction.Description}");
                                         break;
                                     case "withdrawal":
                                         Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | -{transaction.Amount}");
+                                        Console.WriteLine($" {transaction.Date.ToString("d")} - {transaction.Date.ToString("t")} | -{transaction.Amount} | {transaction.Description}");
                                         break;
                                     default:
                                         break;
                                 }
                                 Console.ForegroundColor = oldFontColor;
-                                Console.WriteLine("-----------------------------------");
+                                Console.WriteLine("-------------------------------------------------");
                             }
                             break;
                         case 'L': // Logout
