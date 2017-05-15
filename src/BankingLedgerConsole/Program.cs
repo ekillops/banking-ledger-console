@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BankingLedgerConsole
 {
-
     public static class UserHelper // UserHelper acts as temporary storage for user account data. Storage only last duration of session.
     {
         public static List<User> AllUsers = new List<User>();
@@ -14,10 +12,12 @@ namespace BankingLedgerConsole
         {
             return AllUsers;
         }
+
         public static void AddNew(User newUser)
         {
             AllUsers.Add(newUser);
         }
+
         public static User FindByName(string inputName)
         {
             return AllUsers.FirstOrDefault(u => u.Name == inputName);
@@ -37,12 +37,10 @@ namespace BankingLedgerConsole
 
             return nameAvailable;
         }
-
     }
 
     public class User
     {
-
         public string Name { get; set; } // username rather than first or last
         public string Password { get; set; }
         public Account Account { get; set; }
@@ -59,7 +57,7 @@ namespace BankingLedgerConsole
     {
         decimal Balance;
         List<Transaction> Transactions { get; set; }
-        
+
         public Account()
         {
             Balance = 0;
@@ -83,6 +81,7 @@ namespace BankingLedgerConsole
                 Transactions.Add(new Transaction(amount, "withdrawal"));
             }
         }
+
         public decimal GetBalance()
         {
             return Balance;
@@ -92,7 +91,6 @@ namespace BankingLedgerConsole
         {
             return Transactions.OrderByDescending(t => t.Date).ToList();
         }
-
     }
 
     public class Transaction
@@ -107,7 +105,7 @@ namespace BankingLedgerConsole
             Amount = newAmount;
             Type = newDepositType;
         }
-    } 
+    }
 
     public class Program
     {
@@ -136,12 +134,13 @@ namespace BankingLedgerConsole
 
                     cmdChar = ' '; // Reset command input
                     consoleInput = Console.ReadLine();
+
                     if (consoleInput != "")
                     {
                         cmdChar = consoleInput.ToUpper()[0];
                     }
 
-                    bool validInput; // Used for checking if deposit and withdrawal inputs are valid decimalegers
+                    bool validInput; // Used for checking if deposit and withdrawal inputs are valid numbers
 
                     switch (cmdChar)
                     {
@@ -172,7 +171,7 @@ namespace BankingLedgerConsole
                             }
                             else
                             {
-                                Console.WriteLine("Invalid amount. Please enter a non negative number."); // Change to Float later
+                                Console.WriteLine("Invalid amount. Please enter a non negative number.");
                             }
                             break;
                         case 'W':
@@ -201,7 +200,7 @@ namespace BankingLedgerConsole
                             else
                             {
                                 Console.WriteLine("");
-                                Console.WriteLine("Invalid amount. Please enter a non negative number."); // Change to Float later
+                                Console.WriteLine("Invalid amount. Please enter a non negative number.");
                             }
                             break;
                         case 'T':
@@ -274,7 +273,8 @@ namespace BankingLedgerConsole
                                 Console.Write(" Password: ");
                                 // Change font color to hide user password, not secure if user manually changes font or background color while typing
                                 oldFontColor = Console.ForegroundColor;
-                                Console.ForegroundColor = Console.BackgroundColor; // Change font color to hide user password, not secure if user manually changes font color or background while typing
+                                Console.ForegroundColor = Console.BackgroundColor;
+
                                 inputPassword = Console.ReadLine();
                                 Console.ForegroundColor = oldFontColor;
                                 if (foundUser.Password == inputPassword)
@@ -311,7 +311,7 @@ namespace BankingLedgerConsole
                                 Console.Write(" Password: ");
                                 // Change font color to hide user password, not secure if user manually changes font or background color while typing
                                 oldFontColor = Console.ForegroundColor;
-                                Console.ForegroundColor = Console.BackgroundColor; 
+                                Console.ForegroundColor = Console.BackgroundColor;
                                 inputPassword = Console.ReadLine();
                                 Console.ForegroundColor = oldFontColor;
 
@@ -343,7 +343,6 @@ namespace BankingLedgerConsole
                     }
                 }
             }
-    
             Console.ReadLine();
         }
     }
